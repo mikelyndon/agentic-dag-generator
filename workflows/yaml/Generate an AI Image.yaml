@@ -1,0 +1,50 @@
+name: Generate an AI Image
+
+description:
+  goal: Generate and output an AI-created image based on a user-provided text prompt.
+  keySteps:
+    - Accept a user-input text prompt for image generation
+    - Generate an AI image using the provided prompt and specified parameters
+    - Set default image generation settings (size, model, negative prompt)
+    - Allow for a random seed in image generation for variety
+    - Output the generated image in JPG format
+  summary: This workflow creates a user-friendly interface for AI image generation, allowing customization of the prompt while maintaining preset parameters for consistent, high-quality output. It streamlines the process of turning textual descriptions into visual art, making AI image creation accessible to users.
+
+nodes:
+  - id: "GenerateAiImage"
+    nodeType: "image:ai:generate"
+    inputs:
+      - name: "model"
+        value: "playground"
+      - name: "prompt"
+        value: "A beautiful sunny vista."
+      - name: "negative_prompt"
+        value: "soft, blurry, ugly"
+      - name: "width"
+        value: 1024
+      - name: "height"
+        value: 1024
+
+  - id: "OutputImage"
+    nodeType: "default:output:image"
+    inputs:
+      - name: "imageType"
+        value: "jpg"
+
+  - id: "InputString"
+    nodeType: "default:input:string"
+    inputs:
+      - name: "name"
+        value: "Prompt"
+      - name: "description"
+        value: "Describe your picture."
+      - name: "defaultValue"
+        value: "A beautiful close up of a red panda"
+      - name: "multiline"
+        value: false
+
+edges:
+  - source: "GenerateAiImage.image"
+    target: "OutputImage.value"
+  - source: "InputString.value"
+    target: "GenerateAiImage.prompt"

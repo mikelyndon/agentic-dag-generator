@@ -1,0 +1,143 @@
+name: Time Magazine Cover
+
+description:
+  goal: Create a customized Time magazine cover with a user-provided photo and background.
+
+  keySteps:
+    - Input a photo and resize it to fit the cover dimensions
+    - Remove the background from the resized photo using multiple AI models
+    - Place the processed photo on a custom background image
+    - Add the current date to the cover in the Time magazine style
+    - Composite the photo, background, and text elements
+    - Output the final Time magazine cover image
+
+  summary: This workflow automates the creation of a Time magazine cover by combining user-provided images with AI-powered background removal and dynamic text placement. It offers flexibility in image processing and ensures a polished, magazine-style output.
+
+nodes:
+  - id: "PhotoInput"
+    nodeType: "default:input:image"
+    inputs:
+      - name: "name"
+        value: "Photo"
+
+  - id: "ImagePlacement"
+    nodeType: "default:image:place"
+    inputs:
+      - name: "placementX"
+        value: 35
+      - name: "placementY"
+        value: 35
+      - name: "overWidth"
+        value: 683
+      - name: "overHeight"
+        value: 930
+      - name: "overUnitHandling"
+        value: "pixels"
+      - name: "resizeType"
+        value: "cover"
+
+  - id: "TextLine"
+    nodeType: "default:image:textLine"
+    inputs:
+      - name: "text"
+        value: "29/04/2024"
+      - name: "x"
+        value: 700
+      - name: "y"
+        value: 18
+      - name: "textAlign"
+        value: "right"
+      - name: "textBaseline"
+        value: "middle"
+      - name: "fontSize"
+        value: 15
+      - name: "font"
+        value: "Manrope"
+      - name: "weight"
+        value: "regular"
+      - name: "isBold"
+        value: true
+      - name: "isItalic"
+        value: false
+      - name: "case"
+        value: "default"
+      - name: "color"
+        value: "black"
+
+  - id: "RemoveBackground"
+    nodeType: "image:ai:removeBackground"
+
+  - id: "ImageComposite"
+    nodeType: "default:image:composite"
+
+  - id: "RemoveBackgroundBirefnet"
+    nodeType: "image:ai:removeBackground"
+    inputs:
+      - name: "model"
+        value: "birefnet"
+
+  - id: "ForegroundInput"
+    nodeType: "default:input:image"
+    inputs:
+      - name: "name"
+        value: "FG"
+      - name: "exposed"
+        value: false
+
+  - id: "TimeCoverOutput"
+    nodeType: "default:output:image"
+    inputs:
+      - name: "name"
+        value: "Time Cover"
+
+  - id: "GetCurrentDate"
+    nodeType: "default:time:get_current_date"
+
+  - id: "BackgroundInput"
+    nodeType: "default:input:image"
+    inputs:
+      - name: "name"
+        value: "BG"
+      - name: "exposed"
+        value: false
+
+  - id: "RemoveBackgroundReplicate"
+    nodeType: "replicate:rembg"
+
+  - id: "ImageResize"
+    nodeType: "default:image:resize"
+    inputs:
+      - name: "width"
+        value: "682"
+      - name: "height"
+        value: "932"
+      - name: "type"
+        value: "cover"
+
+edges:
+  - source: "PhotoInput.value"
+    target: "ImageResize.image"
+  - source: "ImagePlacement.image"
+    target: "ImageComposite.under"
+  - source: "TextLine.image"
+    target: "TimeCoverOutput.value"
+  - source: "ImageComposite.image"
+    target: "ImagePlacement.under"
+  - source: "ImagePlacement.image"
+    target: "TextLine.image"
+  - source: "ForegroundInput.value"
+    target: "ImageComposite.over"
+  - source: "GetCurrentDate.value"
+    target: "TextLine.text"
+  - source: "BackgroundInput.value"
+    target: "ImagePlacement.under"
+  - source: "RemoveBackgroundReplicate.image"
+    target: "ImagePlacement.over"
+  - source: "ImageResize.image"
+    target: "ImagePlacement.over"
+  - source: "ImageResize.image"
+    target: "RemoveBackground.image"
+  - source: "ImageResize.image"
+    target: "RemoveBackgroundBirefnet.image"
+  - source: "ImageResize.image"
+    target: "RemoveBackgroundReplicate.image"

@@ -1,0 +1,2674 @@
+[
+  {
+    "id": "image:ai:generate",
+    "name": "Generate Image from Text",
+    "type": "function",
+    "metadata": {
+      "functionType": "explicit",
+      "cost": 1,
+      "runtime": "cloud",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Freplicate_sdxl.jpg?alt=media&token=6dff14da-e5c3-43a9-bbf4-e71966cc6263",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "provider": "magpai",
+      "popularity": 5,
+      "filters": {
+        "content": "image",
+        "function": "create",
+        "expertise": "basic"
+      },
+      "previewProperty": "outputs.image",
+      "function": "image:ai:generate",
+      "description": "Generate an image from just text! Uses the latest and greatest AI model."
+    },
+    "inputs": [
+      {
+        "name": "model",
+        "type": "string",
+        "metadata": {
+          "label": "Model",
+          "defaultValue": "playground",
+          "display": "menu",
+          "menuValues": ["playground", "dalle-3", "sdxl", "fooocus"],
+          "menuLabels": ["Playground", "DALL-E 3", "SDXL", "Fooocus"],
+          "exposed": false
+        }
+      },
+      {
+        "name": "prompt",
+        "type": "string",
+        "metadata": {
+          "multiline": false,
+          "exposed": true,
+          "defaultValue": "A beautiful sunny vista.",
+          "label": "Prompt"
+        }
+      },
+      {
+        "name": "negative_prompt",
+        "type": "string",
+        "metadata": {
+          "label": "Negative Prompt",
+          "defaultValue": "soft, blurry, ugly"
+        }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "exposed": false, "defaultValue": 1024, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": 1024,
+          "label": "Height"
+        }
+      },
+      {
+        "name": "seed",
+        "type": "number",
+        "metadata": { "randomized": true, "label": "Seed" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "image:ai:removeBackground",
+    "name": "Remove Image Background",
+    "type": "function",
+    "metadata": {
+      "functionType": "explicit",
+      "cost": 1,
+      "runtime": "cloud",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Freplicate_rembg.jpg?alt=media&token=ca12da3e-d6b6-47b9-a428-1ba72633d8c2",
+      "dateCreated": 1713755583525,
+      "dateModified": 1713755583525,
+      "popularity": 5,
+      "filters": {
+        "content": "image",
+        "function": "edit",
+        "expertise": "basic"
+      },
+      "tags": ["image", "background", "removal", "rembg", "remove", "bg", "ai"],
+      "provider": "magpai",
+      "previewProperty": "outputs.image",
+      "function": "image:ai:removeBackground",
+      "description": "Remove the background of an image with a prominant foreground."
+    },
+    "inputs": [
+      {
+        "name": "model",
+        "type": "string",
+        "metadata": {
+          "label": "Model",
+          "defaultValue": "birefnet",
+          "display": "menu",
+          "menuValues": ["rembg", "birefnet"],
+          "menuLabels": ["Fast (Rembg)", "Precise (Birefnet)"],
+          "exposed": false
+        }
+      },
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:textLine",
+    "name": "Draw Text (Line)",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "filters": { "content": "image", "function": "create" },
+      "previewProperty": "outputs.image",
+      "function": "image:textLine",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fdefault_image_text.jpg?alt=media&token=7f354473-87ff-4fd5-a3ae-8be1e7024e73",
+      "description": "Draw a single line of text, usefule for labels or headings.",
+      "tags": [
+        "draw",
+        "fill",
+        "text",
+        "on",
+        "add",
+        "to",
+        "paragraph",
+        "font",
+        "image"
+      ]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "metadata": {
+          "exposed": true,
+          "defaultValue": "Hello World",
+          "label": "Text"
+        }
+      },
+      {
+        "name": "x",
+        "type": "number",
+        "metadata": { "defaultValue": 256, "label": "X Position" }
+      },
+      {
+        "name": "y",
+        "type": "number",
+        "metadata": { "defaultValue": 256, "label": "Y Position" }
+      },
+      {
+        "name": "textAlign",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["left", "center", "right"],
+          "menuLabels": ["Left", "Center", "Right"],
+          "defaultValue": "center",
+          "label": "Text Align"
+        }
+      },
+      {
+        "name": "textBaseline",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": [
+            "top",
+            "middle",
+            "bottom",
+            "hanging",
+            "alphabetic",
+            "ideographic"
+          ],
+          "menuLabels": [
+            "Top",
+            "Middle",
+            "Bottom",
+            "Hanging",
+            "Alphabetic",
+            "Ideographic"
+          ],
+          "defaultValue": "middle",
+          "label": "Text Baseline"
+        }
+      },
+      {
+        "name": "fontSize",
+        "type": "number",
+        "metadata": { "defaultValue": 42, "label": "Font Size" }
+      },
+      {
+        "name": "font",
+        "type": "font",
+        "metadata": { "defaultValue": "Bebas Neue", "label": "Font" }
+      },
+      {
+        "name": "weight",
+        "type": "string",
+        "metadata": {
+          "defaultValue": "regular",
+          "label": "Font Weight",
+          "description": "Not all fonts have all weights, regular is the default."
+        }
+      },
+      {
+        "name": "isBold",
+        "type": "boolean",
+        "metadata": { "defaultValue": false, "label": "Bold" }
+      },
+      {
+        "name": "isItalic",
+        "type": "boolean",
+        "metadata": { "defaultValue": false, "label": "Italics" }
+      },
+      {
+        "name": "case",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["default", "uppercase", "lowercase", "capitalize"],
+          "menuLabels": ["Default", "Upper Case", "Lower Case", "Capitalize"],
+          "defaultValue": "default",
+          "label": "Case"
+        }
+      },
+      {
+        "name": "color",
+        "type": "color",
+        "metadata": { "defaultValue": "black", "label": "Color" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "openai:dalle-3",
+    "type": "function",
+    "name": "Generate Image (DALL-E 3)",
+    "metadata": {
+      "cost": 1,
+      "menuCategory": "Image|Create",
+      "function": "integration:generic",
+      "integrationPath": "/openai/dall-e-3",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_dalle.jpg?alt=media&token=3db61def-0676-403d-8082-bf1b29c4e18e",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "logo": "/integrations/chatgpt_logo.svg",
+      "license_url": "https://openai.com/policies/terms-of-use",
+      "category": ["ai", "image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 7,
+      "filters": { "content": "image", "function": "create" },
+      "provider": "openai",
+      "tags": ["openai", "dalle", "image", "generate"],
+      "description": "DALL-E 3 is an advanced text-to-image AI developed by OpenAI that offers improved accuracy and nuance in translating ideas into images, compared to its predecessors. It's designed for easy integration with ChatGPT, allowing for collaborative prompt refinement and generation of images that closely adhere to provided text descriptions. This technology is particularly useful for creators seeking to materialize their concepts into precise visual representations without the need for prompt engineering or extensive revisions."
+    },
+    "inputs": [
+      {
+        "name": "prompt",
+        "type": "string",
+        "metadata": {
+          "exposed": true,
+          "multiline": false,
+          "defaultValue": "A painting of a cat sitting on a chair",
+          "label": "Prompt"
+        }
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["1024x1024", "1792x1024", "1024x1792"],
+          "defaultValue": "1024x1024",
+          "label": "Size"
+        }
+      },
+      {
+        "name": "style",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["vivid", "natural"],
+          "menuLabels": ["Vivid", "Natural"],
+          "defaultValue": "vivid",
+          "label": "Style"
+        }
+      },
+      {
+        "name": "quality",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["standard", "hd"],
+          "menuLabels": ["Standard", "HD"],
+          "defaultValue": "standard",
+          "label": "Quality"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "replicate:yolox",
+    "type": "function",
+    "name": "Object Detection (YOLO X)",
+    "metadata": {
+      "cost": 1,
+      "menuCategory": "Image|Analyze",
+      "function": "replicate:generic",
+      "previewProperty": "outputs.image",
+      "description": "Image object detector using Yolo",
+      "category": ["ai", "image"],
+      "provider": "replicate",
+      "provider_url": "https://replicate.com/tofighi/yolox",
+      "license_url": "https://github.com/MegEngine/YOLOX/blob/main/LICENSE",
+      "license_type": "Apache License 2.0",
+      "replicateVersion": "ae0d70cebf6afb2ac4f5e4375eb599c178238b312c8325a9a114827ba869e3e9",
+      "tags": ["object", "detection", "yolox"]
+    },
+    "inputs": [
+      {
+        "name": "input_image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "model_name",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["yolox-s", "yolox-m", "yolox-l", "yolox-x"],
+          "defaultValue": "yolox-s",
+          "label": "Model"
+        }
+      },
+      {
+        "name": "conf",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "stepValue": 0.01,
+          "defaultValue": 0.3,
+          "label": "Confidence"
+        }
+      },
+      {
+        "name": "nms",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "stepValue": 0.01,
+          "defaultValue": 0.3,
+          "label": "NMS"
+        }
+      },
+      {
+        "name": "tsize",
+        "type": "number",
+        "metadata": { "defaultValue": 640, "label": "Target Size" }
+      },
+      {
+        "name": "return_json",
+        "type": "boolean",
+        "metadata": { "defaultValue": false, "label": "Return JSON" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "replicate:blip_2",
+    "type": "function",
+    "name": "Ask Image a Question (BLIP 2 Image Understanding)",
+    "metadata": {
+      "cost": 1,
+      "menuCategory": "Image|Analyze",
+      "function": "replicate:generic",
+      "previewProperty": "outputs.answer",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "utility" },
+      "tags": [
+        "talk",
+        "image",
+        "blip 2",
+        "understanding",
+        "question",
+        "interrogate"
+      ],
+      "category": ["ai", "image", "string"],
+      "provider": "replicate",
+      "provider_url": "https://replicate.com/andreasjansson/blip-2",
+      "description": "Answers questions about images",
+      "replicateVersion": "4b32258c42e9efd4288bb9910bc532a69727f9acd26aa08e175713a0a857a608"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "label": "Image", "exposed": true }
+      },
+      {
+        "name": "question",
+        "type": "string",
+        "metadata": { "label": "Question" }
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "metadata": {
+          "label": "Context",
+          "description": "you can provide the output of a previous Q&A as context in 'question: ... answer: ...' format"
+        }
+      },
+      {
+        "name": "use_nucleus_sampling",
+        "type": "boolean",
+        "metadata": { "label": "Use Nucleus Sampling", "defaultValue": false }
+      },
+      {
+        "name": "caption",
+        "type": "boolean",
+        "metadata": { "label": "Caption", "defaultValue": false }
+      },
+      {
+        "name": "temperature",
+        "type": "number",
+        "metadata": {
+          "label": "Temperature",
+          "defaultValue": 1,
+          "minValue": 0.5,
+          "maxValue": 1,
+          "stepValue": 0.001,
+          "display": "range"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "answer",
+        "type": "string",
+        "metadata": { "exposed": true, "label": "Answer" }
+      }
+    ]
+  },
+  {
+    "id": "replicate:real_esrgan",
+    "type": "function",
+    "name": "Upscale Image",
+    "metadata": {
+      "cost": 1,
+      "menuCategory": "Image|Process",
+      "function": "replicate:generic",
+      "previewProperty": "outputs.image",
+      "category": ["ai", "image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 8,
+      "filters": { "content": "image", "function": "utility" },
+      "provider": "replicate",
+      "description": "Increase the resolution of an image with AI. Input image should usually be below 1024x1024.",
+      "replicateVersion": "42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b",
+      "tags": ["image", "upres", "resolution", "superresolution"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "scale",
+        "type": "number",
+        "metadata": {
+          "minValue": 1,
+          "maxValue": 10,
+          "defaultValue": 4,
+          "label": "Scale"
+        }
+      },
+      {
+        "name": "face_enhance",
+        "type": "boolean",
+        "metadata": { "label": "Face Enhance" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "replicate:rembg",
+    "type": "function",
+    "name": "Remove Background (Image - Rembg)",
+    "metadata": {
+      "cost": 1,
+      "menuCategory": "Image|Process",
+      "function": "replicate:generic",
+      "previewProperty": "outputs.image",
+      "category": ["ai", "image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 8,
+      "filters": { "content": "image", "function": "edit" },
+      "provider": "replicate",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Freplicate_rembg.jpg?alt=media&token=ca12da3e-d6b6-47b9-a428-1ba72633d8c2",
+      "replicateVersion": "fb8af171cfa1616ddcf1242c093f9c46bcada5ad4cf6f2fbe8b81b330ec5c003",
+      "description": "Remove the background from an image. Subject must be prominent. Struggles with hair, but usually fast.",
+      "tags": ["background", "removal", "remove"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:noise",
+    "name": "Generate Noise (Image)",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_noise.jpg?alt=media&token=b9cf21d6-12cd-4cd9-a594-41a06bf8dba1",
+      "popularity": 5,
+      "filters": { "content": "image", "function": "create" },
+      "function": "image:noise",
+      "category": ["image"],
+      "description": "Generate a noise image. Useful for adding texture or grain to an image.",
+      "tags": ["grain", "noise", "image"]
+    },
+    "inputs": [
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Height" }
+      },
+      {
+        "name": "color",
+        "type": "color",
+        "metadata": { "defaultValue": "black", "label": "Color" }
+      },
+      {
+        "name": "intensity",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "defaultValue": 0.5,
+          "label": "Intensity"
+        }
+      },
+      {
+        "name": "transparent",
+        "type": "boolean",
+        "metadata": { "label": "Transparent" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:vignette",
+    "name": "Generate Vignette (Image)",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "function": "image:vignette",
+      "category": ["image"],
+      "description": "Generate a vignette image. Useful for adding a vintage look to an image."
+    },
+    "inputs": [
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Height" }
+      },
+      {
+        "name": "outerRadius",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "defaultValue": 0.5,
+          "label": "Outer Radius"
+        }
+      },
+      {
+        "name": "innerRadius",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "defaultValue": 0.2,
+          "label": "Inner Radius"
+        }
+      },
+      {
+        "name": "color",
+        "type": "color",
+        "metadata": { "defaultValue": "black", "label": "Color" }
+      },
+      {
+        "name": "intensity",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "defaultValue": 0.5,
+          "label": "Intensity"
+        }
+      },
+      {
+        "name": "backgroundColor",
+        "type": "color",
+        "metadata": {
+          "defaultValue": "transparent",
+          "label": "Background Color"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:blur",
+    "name": "Blur",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Filter",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "function": "image:blur",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_blur.jpg?alt=media&token=87e5a530-108d-4dc5-a5b9-8eaa8764d521",
+      "popularity": 5,
+      "filters": { "content": "image", "function": "filter" },
+      "description": "Blurs an image."
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "metadata": { "exposed": true, "defaultValue": 4, "label": "Amount" }
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["fast", "gaussian"],
+          "defaultValue": "fast",
+          "label": "Type"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:drop_shadow",
+    "name": "Drop Shadow",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Filter",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "function": "image:drop_shadow",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 7,
+      "filters": { "content": "image", "function": "filter" },
+      "category": ["image"],
+      "description": "Add a drop shadow to a transparent image.",
+      "tags": ["drop", "shadow", "image"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "metadata": { "exposed": true, "defaultValue": 4, "label": "Amount" }
+      },
+      {
+        "name": "offset_x",
+        "type": "number",
+        "metadata": { "exposed": false, "defaultValue": 0, "label": "Offset X" }
+      },
+      {
+        "name": "offset_y",
+        "type": "number",
+        "metadata": { "exposed": false, "defaultValue": 0, "label": "Offset Y" }
+      },
+      {
+        "name": "color",
+        "type": "color",
+        "metadata": { "label": "Color", "defaultValue": "black" }
+      },
+      {
+        "name": "use_image_color",
+        "type": "boolean",
+        "metadata": {
+          "label": "Use Image Color",
+          "defaultValue": false,
+          "description": "Use the color of the image instead of the color input."
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:outline",
+    "name": "Outline Image",
+    "type": "function",
+    "metadata": {
+      "menuCategory": "Image|Filter",
+      "previewProperty": "outputs.image",
+      "function": "image:outline",
+      "description": "Add an outline to an image.",
+      "primaryContentType": "image",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "edit" },
+      "category": ["image"],
+      "functionType": "implicit",
+      "tags": ["outline", "image", "edge"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "exposed": true, "defaultValue": 4, "label": "Width" }
+      },
+      {
+        "name": "color",
+        "type": "color",
+        "metadata": { "label": "Color", "defaultValue": "black" }
+      },
+      {
+        "name": "keepOriginal",
+        "type": "boolean",
+        "metadata": {
+          "label": "Keep Original",
+          "defaultValue": true,
+          "description": "Keep the original image in the output."
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:make_mask",
+    "name": "Make Mask from Transparency",
+    "type": "function",
+    "metadata": {
+      "menuCategory": "Image|Utility|Mask",
+      "previewProperty": "outputs.image",
+      "function": "image:make_mask",
+      "primaryContentType": "image",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "create" },
+      "functionType": "implicit",
+      "description": "Make a black and white mask from the transparency of an image."
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "invert",
+        "type": "boolean",
+        "metadata": { "defaultValue": false, "label": "Invert" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:mask",
+    "name": "Mask Image",
+    "type": "function",
+    "metadata": {
+      "menuCategory": "Image|Utility|Mask",
+      "previewProperty": "outputs.image",
+      "function": "image:mask",
+      "primaryContentType": "image",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "edit" },
+      "functionType": "implicit",
+      "description": "Cut out an image with a black and white mask."
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "mask",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Mask" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:blank",
+    "name": "Create Blank Image",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_blank.jpg?alt=media&token=3fafa6ef-00b8-4f08-a2da-817d7c8c3ecd",
+      "popularity": 6,
+      "filters": { "content": "image", "function": "create" },
+      "category": ["image"],
+      "tags": ["blank", "empty", "image"],
+      "function": "image:blank",
+      "description": "Generate a blank, empty image of a specific size and color."
+    },
+    "inputs": [
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Height" }
+      },
+      {
+        "name": "color",
+        "type": "color",
+        "metadata": { "defaultValue": "white", "label": "Color" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "image:gradient:linear",
+    "name": "Create a Linear Gradient",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "previewProperty": "outputs.image",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_gradient_linear.jpg?alt=media&token=c22176b4-bb39-450c-820e-88f9ecad7f58",
+      "primaryContentType": "image",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "create" },
+      "function": "image:gradient:linear",
+      "description": "Create an image of a linear gradient with specific colors, between two points.",
+      "tags": ["gradient", "linear", "image"]
+    },
+    "inputs": [
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Height" }
+      },
+      {
+        "name": "pos_1",
+        "type": "vector2",
+        "metadata": { "defaultValue": [0, 256], "label": "Start Position" }
+      },
+      {
+        "name": "pos_2",
+        "type": "vector2",
+        "metadata": { "defaultValue": [512, 256], "label": "End Position" }
+      },
+      {
+        "name": "color_stops",
+        "type": "colorStop",
+        "metadata": {
+          "defaultValue": [
+            { "color": "black", "position": 0 },
+            { "color": "white", "position": 1 }
+          ],
+          "label": "Color Stops",
+          "array": true,
+          "exposed": true
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "image:gradient:radial",
+    "name": "Create a Radial Gradient",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_gradient_radial.jpg?alt=media&token=8abecf1f-72e0-4290-b187-5f984dd0cb96",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "create" },
+      "function": "image:gradient:radial",
+      "description": "Create an image of a radial gradient with specific colors, at a specific point, with a specific radius.",
+      "tags": ["gradient", "radial", "image"]
+    },
+    "inputs": [
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Height" }
+      },
+      {
+        "name": "pos_1",
+        "type": "vector2",
+        "metadata": { "defaultValue": [256, 256], "label": "Start Position" }
+      },
+      {
+        "name": "radius_1",
+        "type": "number",
+        "metadata": { "defaultValue": 0, "label": "Start Radius" }
+      },
+      {
+        "name": "pos_2",
+        "type": "vector2",
+        "metadata": { "defaultValue": [256, 256], "label": "End Position" }
+      },
+      {
+        "name": "radius_2",
+        "type": "number",
+        "metadata": { "defaultValue": 400, "label": "End Radius" }
+      },
+      {
+        "name": "color_stops",
+        "type": "colorStop",
+        "metadata": {
+          "defaultValue": [
+            { "color": "black", "position": 0 },
+            { "color": "white", "position": 1 }
+          ],
+          "label": "Color Stops",
+          "array": true,
+          "exposed": true
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:string:format",
+    "name": "Text Format",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Text|Utility",
+      "description": "Given a string template, replace placeholders with values.",
+      "function": "string:format",
+      "previewProperty": "outputs.value",
+      "category": ["string"],
+      "display": "hidden"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "metadata": { "exposed": true, "label": "Value" }
+      },
+      { "name": "format", "type": "string", "metadata": { "label": "Format" } }
+    ],
+    "outputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "metadata": { "exposed": true, "label": "Value" }
+      }
+    ]
+  },
+  {
+    "id": "default:array:get",
+    "name": "Get Array Item",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Utility|Array",
+      "function": "array:get",
+      "previewProperty": "outputs.value",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "misc", "function": "utility" },
+      "description": "Get an item from an array by index."
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "any",
+        "metadata": { "exposed": true, "array": true, "label": "Array" }
+      },
+      {
+        "name": "index",
+        "type": "number",
+        "metadata": { "defaultValue": 0, "label": "Index" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "value",
+        "type": "any",
+        "metadata": { "exposed": true, "label": "Value" }
+      }
+    ]
+  },
+  {
+    "id": "default:time:get_current_date",
+    "name": "Get Current Date",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Text|Utility",
+      "function": "datetime:get_current_date",
+      "previewProperty": "outputs.value",
+      "category": ["string"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "text", "function": "utility" },
+      "description": "Gets the current date based on the user's browser, or relative to GMT.",
+      "tags": [
+        "date",
+        "time",
+        "current",
+        "month",
+        "year",
+        "day",
+        "hour",
+        "minute",
+        "second",
+        "today"
+      ]
+    },
+    "inputs": [
+      {
+        "name": "separator",
+        "type": "string",
+        "metadata": { "defaultValue": "/", "label": "Separator" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "metadata": { "exposed": true, "label": "Date" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:filter",
+    "name": "Image FX",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Filter",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_fx.jpg?alt=media&token=b2cb7fea-c621-4673-9502-f3cb59f51ee0",
+      "popularity": 5,
+      "filters": { "content": "image", "function": "filter" },
+      "function": "image:filter",
+      "description": "Apply a filter to an image.",
+      "tags": [
+        "image",
+        "filter",
+        "fx",
+        "instagram",
+        "effects",
+        "sepia",
+        "greyscale",
+        "posterize",
+        "pixelate",
+        "desaturate",
+        "saturate"
+      ]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "filterType",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["sepia", "greyscale", "posterize", "pixelate"],
+          "defaultValue": "sepia",
+          "label": "Filter"
+        }
+      },
+      {
+        "name": "filterAmount",
+        "type": "number",
+        "metadata": { "defaultValue": 1, "label": "Amount" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:brightness_contrast",
+    "name": "Adjust Brightness/Contrast",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Filter|Color",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fdefault_image_brightness_contrast.jpg?alt=media&token=10801d08-ea6c-4f37-8d0f-2a0c1c7a119e",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "filter" },
+      "function": "image:brightness_contrast",
+      "description": "Adjust the brightness and contrast of an image.",
+      "tags": [
+        "image",
+        "filter",
+        "fx",
+        "effects",
+        "brightness",
+        "contrast",
+        "desaturate",
+        "saturate"
+      ]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "brightness",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "defaultValue": 0,
+          "minValue": -1,
+          "maxValue": 1,
+          "stepValue": 0.01,
+          "label": "Brightness"
+        }
+      },
+      {
+        "name": "contrast",
+        "type": "number",
+        "metadata": {
+          "display": "range",
+          "defaultValue": 0,
+          "minValue": -1,
+          "maxValue": 1,
+          "stepValue": 0.01,
+          "label": "Contrast"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:text",
+    "name": "Draw Text",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Text",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "function": "image:text",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fdefault_image_text.jpg?alt=media&token=7f354473-87ff-4fd5-a3ae-8be1e7024e73",
+      "description": "Draw text to an existing image, or onto a blank image.",
+      "category": ["image", "string"],
+      "tags": [
+        "draw",
+        "fill",
+        "text",
+        "on",
+        "add",
+        "to",
+        "paragraph",
+        "font",
+        "image"
+      ]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "metadata": {
+          "exposed": true,
+          "defaultValue": "Hello World",
+          "label": "Text"
+        }
+      },
+      {
+        "name": "x",
+        "type": "number",
+        "metadata": { "defaultValue": 0, "label": "Text Box X" }
+      },
+      {
+        "name": "y",
+        "type": "number",
+        "metadata": { "defaultValue": 0, "label": "Text Box Y" }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Text Box Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Text Box Height" }
+      },
+      {
+        "name": "wrapMode",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["none", "word", "char"],
+          "menuLabels": ["None", "Word", "Character"],
+          "defaultValue": "none",
+          "label": "Text Wrap Mode"
+        }
+      },
+      {
+        "name": "textAlign",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["left", "center", "right"],
+          "menuLabels": ["Left", "Center", "Right"],
+          "defaultValue": "center",
+          "label": "Text Align"
+        }
+      },
+      {
+        "name": "verticalAlign",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["top", "middle", "bottom"],
+          "menuLabels": ["Top", "Middle", "Bottom"],
+          "defaultValue": "middle",
+          "label": "Vertical Align"
+        }
+      },
+      {
+        "name": "textBaseline",
+        "type": "string",
+        "metadata": {
+          "display": "hidden",
+          "menuValues": [
+            "top",
+            "middle",
+            "bottom",
+            "hanging",
+            "alphabetic",
+            "ideographic"
+          ],
+          "menuLabels": [
+            "Top",
+            "Middle",
+            "Bottom",
+            "Hanging",
+            "Alphabetic",
+            "Ideographic"
+          ],
+          "defaultValue": "middle",
+          "label": "Text Baseline"
+        }
+      },
+      {
+        "name": "lineHeight",
+        "type": "number",
+        "metadata": { "defaultValue": 1, "label": "Line Height" }
+      },
+      {
+        "name": "fontSize",
+        "type": "number",
+        "metadata": { "defaultValue": 42, "label": "Font Size" }
+      },
+      {
+        "name": "font",
+        "type": "font",
+        "metadata": { "defaultValue": "Bebas Neue", "label": "Font" }
+      },
+      {
+        "name": "weight",
+        "type": "string",
+        "metadata": {
+          "defaultValue": "regular",
+          "label": "Font Weight",
+          "description": "Not all fonts have all weights, regular is the default."
+        }
+      },
+      {
+        "name": "isBold",
+        "type": "boolean",
+        "metadata": { "defaultValue": false, "label": "Bold" }
+      },
+      {
+        "name": "isItalic",
+        "type": "boolean",
+        "metadata": { "defaultValue": false, "label": "Italics" }
+      },
+      {
+        "name": "truncate",
+        "type": "boolean",
+        "metadata": {
+          "defaultValue": false,
+          "label": "Truncate",
+          "display": "hidden"
+        }
+      },
+      {
+        "name": "case",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["default", "uppercase", "lowercase", "capitalize"],
+          "menuLabels": ["Default", "Upper Case", "Lower Case", "Capitalize"],
+          "defaultValue": "default",
+          "label": "Case"
+        }
+      },
+      {
+        "name": "color",
+        "type": "color",
+        "metadata": { "defaultValue": "black", "label": "Color" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:sticky_note",
+    "type": "aesthetic",
+    "name": "Sticky Note",
+    "metadata": {
+      "cost": 0,
+      "menuCategory": "Utility",
+      "previewProperty": "inputs.note",
+      "description": "Useful for leaving notes for yourself or others.",
+      "category": ["utility"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 9,
+      "filters": { "content": "misc", "function": "utility" },
+      "tags": ["stick", "note", "postit", "utility"]
+    },
+    "inputs": [
+      {
+        "name": "note",
+        "type": "string",
+        "metadata": {
+          "exposed": false,
+          "label": "Note",
+          "defaultValue": "Sticky Notes Rule!"
+        }
+      },
+      {
+        "name": "textSize",
+        "type": "number",
+        "metadata": {
+          "exposed": false,
+          "label": "Text Size",
+          "defaultValue": 50,
+          "display": "range",
+          "minValue": 10,
+          "maxValue": 500,
+          "stepValue": 1
+        }
+      },
+      {
+        "name": "bold",
+        "type": "boolean",
+        "metadata": { "exposed": false, "label": "Bold", "defaultValue": false }
+      },
+      {
+        "name": "textAlign",
+        "type": "string",
+        "metadata": {
+          "exposed": false,
+          "label": "Text Align",
+          "defaultValue": "center",
+          "display": "menu",
+          "menuValues": ["left", "center", "right"],
+          "menuLabels": ["Left", "Center", "Right"]
+        }
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "id": "image:colorthief",
+    "name": "Extract Color Palette",
+    "type": "function",
+    "metadata": {
+      "functionType": "explicit",
+      "menuCategory": "Image|Color",
+      "function": "image:colorthief",
+      "previewProperty": "outputs.dominantColor",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "utility" },
+      "description": "Extract the dominant colors from an image.\nReturns an ordered palette from most common to least.",
+      "tags": [
+        "color",
+        "colorthief",
+        "image",
+        "extract",
+        "colors",
+        "palette",
+        "dominant"
+      ],
+      "category": ["image"],
+      "accessRestriction": 5
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "label": "Image", "exposed": true }
+      },
+      {
+        "name": "max_colors",
+        "type": "number",
+        "metadata": {
+          "label": "Maximum number of Colors",
+          "defaultValue": 5,
+          "description": "There may be less colors than this if the image has less colors than this value"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "dominantColor",
+        "type": "color",
+        "metadata": { "label": "Dominant Color" }
+      },
+      {
+        "name": "palette",
+        "type": "color",
+        "metadata": { "label": "Palette", "array": true }
+      }
+    ]
+  },
+  {
+    "id": "image:draw:shape:rectangle",
+    "name": "Draw Rectangle",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_draw_shape_rectangle.jpg?alt=media&token=e06944f6-349e-4a41-97c4-5204bbdc3102",
+      "function": "image:draw:shape:rectangle",
+      "previewProperty": "outputs.image",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "create" },
+      "description": "Draw a rectangle",
+      "tags": ["draw", "shape", "image", "rectangle"],
+      "category": ["image"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "label": "Image", "exposed": true }
+      },
+      {
+        "name": "positionX",
+        "type": "number",
+        "metadata": { "label": "Position X", "defaultValue": 20 }
+      },
+      {
+        "name": "positionY",
+        "type": "number",
+        "metadata": { "label": "Position Y", "defaultValue": 20 }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "label": "Width", "defaultValue": 300 }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "label": "Height", "defaultValue": 300 }
+      },
+      {
+        "name": "cornerRadius",
+        "type": "number",
+        "metadata": { "label": "Corner Radius", "defaultValue": 20 }
+      },
+      {
+        "name": "fillColor",
+        "type": "color",
+        "metadata": { "label": "Color", "defaultValue": "#8793EE" }
+      },
+      {
+        "name": "strokeColor",
+        "type": "color",
+        "metadata": { "label": "Stroke Color", "defaultValue": "#000000" }
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "metadata": { "label": "Stroke Width", "defaultValue": 4 }
+      }
+    ],
+    "outputs": [
+      { "name": "image", "type": "image", "metadata": { "label": "Image" } }
+    ]
+  },
+  {
+    "id": "image:draw:shape:ellipse",
+    "name": "Draw Ellipse",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "function": "image:draw:shape:ellipse",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_draw_shape_ellipse.jpg?alt=media&token=5ff84743-bcd1-41c8-94e8-c9c11a40fb60",
+      "popularity": 5,
+      "filters": { "content": "image", "function": "create" },
+      "previewProperty": "outputs.image",
+      "description": "Draw an ellipse",
+      "tags": ["draw", "shape", "image", "ellipse"],
+      "category": ["image"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "label": "Image", "exposed": true }
+      },
+      {
+        "name": "positionX",
+        "type": "number",
+        "metadata": { "label": "Position X", "defaultValue": 20 }
+      },
+      {
+        "name": "positionY",
+        "type": "number",
+        "metadata": { "label": "Position Y", "defaultValue": 20 }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "label": "Width", "defaultValue": 400 }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "label": "Height", "defaultValue": 200 }
+      },
+      {
+        "name": "fillColor",
+        "type": "color",
+        "metadata": { "label": "Color", "defaultValue": "#8793EE" }
+      },
+      {
+        "name": "strokeColor",
+        "type": "color",
+        "metadata": { "label": "Stroke Color", "defaultValue": "#000000" }
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "metadata": { "label": "Stroke Width", "defaultValue": 4 }
+      }
+    ],
+    "outputs": [
+      { "name": "image", "type": "image", "metadata": { "label": "Image" } }
+    ]
+  },
+  {
+    "id": "image:draw:shape:circle",
+    "name": "Draw Circle",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Create",
+      "function": "image:draw:shape:circle",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_draw_shape_circle.jpg?alt=media&token=ad31b334-4a98-4d05-aad0-aaa736d3a453",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "create" },
+      "previewProperty": "outputs.image",
+      "description": "Draw a circle",
+      "tags": ["draw", "shape", "image", "circle"],
+      "category": ["image"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "label": "Image", "exposed": true }
+      },
+      {
+        "name": "positionX",
+        "type": "number",
+        "metadata": { "label": "Position X", "defaultValue": 20 }
+      },
+      {
+        "name": "positionY",
+        "type": "number",
+        "metadata": { "label": "Position Y", "defaultValue": 20 }
+      },
+      {
+        "name": "radius",
+        "type": "number",
+        "metadata": { "label": "Radius", "defaultValue": 100 }
+      },
+      {
+        "name": "fillColor",
+        "type": "color",
+        "metadata": { "label": "Color", "defaultValue": "#8793EE" }
+      },
+      {
+        "name": "strokeColor",
+        "type": "color",
+        "metadata": { "label": "Stroke Color", "defaultValue": "#000000" }
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "metadata": { "label": "Stroke Width", "defaultValue": 4 }
+      }
+    ],
+    "outputs": [
+      { "name": "image", "type": "image", "metadata": { "label": "Image" } }
+    ]
+  },
+  {
+    "id": "default:input:image",
+    "type": "function",
+    "name": "Input (Image)",
+    "context": {},
+    "metadata": {
+      "functionType": "implicit",
+      "function": "default:input:image",
+      "menuCategory": "User Inputs",
+      "previewProperty": "outputs.value",
+      "dateCreated": 1708520439285,
+      "description": "Allow a user to input an image when this workflow is used as a template",
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": { "content": "image", "function": "utility" },
+      "category": ["image"],
+      "tags": ["image", "input"]
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "metadata": {
+          "defaultValue": "input",
+          "multiline": false,
+          "label": "Name"
+        },
+        "context": {}
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": "",
+          "multiline": true,
+          "label": "Description"
+        },
+        "context": {}
+      },
+      {
+        "name": "defaultValue",
+        "type": "image",
+        "metadata": { "source": "outputs.value", "label": "Default Value" },
+        "context": {}
+      },
+      {
+        "name": "exposed",
+        "type": "boolean",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": true,
+          "label": "Expose to template"
+        },
+        "context": {}
+      },
+      {
+        "name": "priority",
+        "type": "number",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": 0,
+          "description": "Bigger numbers will be lower in the UI.",
+          "label": "Priority"
+        },
+        "context": {}
+      }
+    ],
+    "outputs": [
+      {
+        "name": "value",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" },
+        "context": {}
+      }
+    ]
+  },
+  {
+    "id": "default:input:string",
+    "type": "function",
+    "name": "Input (Text)",
+    "metadata": {
+      "functionType": "implicit",
+      "function": "default:input:string",
+      "menuCategory": "User Inputs",
+      "previewProperty": "outputs.value",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "description": "Allow a user to input any text when this workflow is used as a template",
+      "popularity": 5,
+      "filters": { "content": "text", "function": "utility" },
+      "category": ["string"],
+      "tags": ["text", "input", "prompt", "string"]
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "metadata": {
+          "defaultValue": "input",
+          "multiline": false,
+          "label": "Name"
+        }
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": "",
+          "multiline": true,
+          "label": "Description"
+        }
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "metadata": { "source": "outputs.value", "label": "Default Value" }
+      },
+      {
+        "name": "exposed",
+        "type": "boolean",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": true,
+          "label": "Expose to template"
+        }
+      },
+      {
+        "name": "priority",
+        "type": "number",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": 0,
+          "description": "Bigger numbers will be lower in the UI.",
+          "label": "Priority"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "metadata": { "exposed": true, "label": "Text" }
+      }
+    ]
+  },
+  {
+    "id": "default:output:image",
+    "type": "function",
+    "name": "Output (Image)",
+    "metadata": {
+      "function": "default:output:image",
+      "functionType": "implicit",
+      "menuCategory": "Outputs",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "description": "Specify a final image to output when this workflow is used as a template",
+      "popularity": 5,
+      "filters": { "content": "image", "function": "utility" },
+      "previewProperty": "outputs.value",
+      "tags": ["image", "output", "file"]
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "metadata": {
+          "defaultValue": "output",
+          "multiline": false,
+          "label": "Name"
+        }
+      },
+      {
+        "name": "value",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "imageType",
+        "type": "string",
+        "metadata": {
+          "exposed": false,
+          "label": "Image Type",
+          "default": "png",
+          "display": "menu",
+          "menuValues": ["png", "jpg"],
+          "menuLabels": ["PNG", "JPG"]
+        }
+      },
+      {
+        "name": "exposed",
+        "type": "boolean",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": true,
+          "label": "Expose to template"
+        }
+      },
+      {
+        "name": "priority",
+        "type": "number",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": 0,
+          "description": "Bigger numbers will be lower in the UI.",
+          "label": "Priority"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "value",
+        "type": "image",
+        "metadata": { "exposed": false, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:invert",
+    "name": "Invert Colors",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Filter|Color",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "category": ["image"],
+      "function": "image:invert",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_invert.jpg?alt=media&token=451e867a-b7b2-4957-b29f-89faf8d7b633",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": {
+        "content": "image",
+        "function": "filter",
+        "intent": "utility"
+      },
+      "description": "Invert the colors of an image.",
+      "tags": ["invert", "negative", "inverse", "flip"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:composite",
+    "name": "Composite Images",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Utility",
+      "previewProperty": "outputs.image",
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "slug": "image-composite",
+      "popularity": 5,
+      "filters": {
+        "content": "image",
+        "function": "combine",
+        "intent": "utility"
+      },
+      "primaryContentType": "image",
+      "function": "image:composite",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_composite.jpg?alt=media&token=f14635bf-eb4c-45c2-b4e5-da563e1afc3e",
+      "category": ["image"],
+      "description": "Layer two images with optional compositing and transparency options.",
+      "tags": [
+        "image",
+        "combine",
+        "overlay",
+        "blend",
+        "composite",
+        "layer",
+        "transparency",
+        "opacity"
+      ]
+    },
+    "inputs": [
+      {
+        "name": "mode",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": [
+            "source-over",
+            "destination-over",
+            "multiply",
+            "lighter",
+            "screen",
+            "overlay",
+            "darken",
+            "lighten",
+            "hard-light",
+            "soft-light",
+            "difference",
+            "exclusion"
+          ],
+          "menuLabels": [
+            "Source Over",
+            "Destination Over",
+            "Multiply",
+            "Additive",
+            "Screen",
+            "Overlay",
+            "Darken",
+            "Lighten",
+            "Hard Light",
+            "Soft Light",
+            "Difference",
+            "Exclusion"
+          ],
+          "defaultValue": "source-over",
+          "label": "Transparency Mode"
+        }
+      },
+      {
+        "name": "under",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Under" }
+      },
+      {
+        "name": "over",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Over" }
+      },
+      {
+        "name": "srcOpacity",
+        "type": "number",
+        "metadata": {
+          "defaultValue": 1,
+          "label": "Under Opacity",
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "stepValue": 0.001
+        }
+      },
+      {
+        "name": "destOpacity",
+        "type": "number",
+        "metadata": {
+          "defaultValue": 1,
+          "label": "Over Opacity",
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "stepValue": 0.001
+        }
+      },
+      {
+        "name": "resizeType",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["cover", "contain", "stretch"],
+          "menuLabels": ["Cover", "Contain", "Stretch"],
+          "defaultValue": "stretch",
+          "label": "Resize Type"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:place",
+    "name": "Place Image",
+    "type": "function",
+    "metadata": {
+      "functionType": "implicit",
+      "menuCategory": "Image|Utility",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fimage_place.jpg?alt=media&token=2ed32f03-c7e6-4089-86ab-e8c5e58fe56d",
+      "previewProperty": "outputs.image",
+      "primaryContentType": "image",
+      "function": "image:place",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 5,
+      "filters": {
+        "content": "image",
+        "function": "create",
+        "intent": "utility"
+      },
+      "description": "Combine 2 images with optional transparency. Allows placement of the top image.",
+      "tags": ["image", "combine", "overlay", "blend"]
+    },
+    "inputs": [
+      {
+        "name": "mode",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": [
+            "source-over",
+            "destination-over",
+            "multiply",
+            "lighter",
+            "screen",
+            "overlay",
+            "darken",
+            "lighten",
+            "hard-light",
+            "soft-light",
+            "difference",
+            "exclusion"
+          ],
+          "menuLabels": [
+            "Source Over",
+            "Destination Over",
+            "Multiply",
+            "Additive",
+            "Screen",
+            "Overlay",
+            "Darken",
+            "Lighten",
+            "Hard Light",
+            "Soft Light",
+            "Difference",
+            "Exclusion"
+          ],
+          "defaultValue": "source-over",
+          "label": "Transparency Mode"
+        }
+      },
+      {
+        "name": "under",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Under" }
+      },
+      {
+        "name": "over",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Over" }
+      },
+      {
+        "name": "destOpacity",
+        "type": "number",
+        "metadata": {
+          "defaultValue": 1,
+          "label": "Opacity",
+          "display": "range",
+          "minValue": 0,
+          "maxValue": 1,
+          "stepValue": 0.001
+        }
+      },
+      {
+        "name": "placementX",
+        "type": "number",
+        "metadata": { "defaultValue": 0, "label": "X Position" }
+      },
+      {
+        "name": "placementY",
+        "type": "number",
+        "metadata": { "defaultValue": 0, "label": "Y Position" }
+      },
+      {
+        "name": "overWidth",
+        "type": "number",
+        "metadata": { "defaultValue": 100, "label": "Width" }
+      },
+      {
+        "name": "overHeight",
+        "type": "number",
+        "metadata": { "defaultValue": 100, "label": "Height" }
+      },
+      {
+        "name": "overUnitHandling",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["pixels", "percentage", "factor"],
+          "menuLabels": ["Pixels", "Percentage", "Factor"],
+          "defaultValue": "percentage",
+          "label": "Unit Handling"
+        }
+      },
+      {
+        "name": "resizeType",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["cover", "contain", "stretch"],
+          "menuLabels": ["Cover", "Contain", "Stretch"],
+          "defaultValue": "stretch",
+          "label": "Resize Type"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "default:image:resize",
+    "name": "Resize Image",
+    "type": "function",
+    "metadata": {
+      "menuCategory": "Image|Utility",
+      "primaryContentType": "image",
+      "previewProperty": "outputs.image",
+      "function": "image:resize",
+      "category": ["image"],
+      "dateCreated": 1708520439285,
+      "dateModified": 1708570439285,
+      "popularity": 6,
+      "filters": { "content": "image", "function": "edit" },
+      "description": "Resize an image to a certain width and height.",
+      "tags": ["image", "resize", "scale", "fit", "contain", "cover"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": { "defaultValue": 512, "label": "Height" }
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": [
+            "auto",
+            "nearest-neighbour",
+            "bilinear",
+            "bicubic",
+            "hermite",
+            "bezier"
+          ],
+          "menuLabels": [
+            "Auto",
+            "Nearest Neighbour",
+            "Bilinear",
+            "Bicubic",
+            "Hermite",
+            "Bezier"
+          ],
+          "defaultValue": "auto",
+          "label": "Sampling Mode"
+        }
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": ["cover", "contain", "stretch"],
+          "menuLabels": ["Cover", "Contain", "Stretch"],
+          "defaultValue": "contain",
+          "label": "Type"
+        }
+      },
+      {
+        "name": "backgroundColor",
+        "type": "color",
+        "metadata": {
+          "defaultValue": "transparent",
+          "label": "Background Color"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "fal:rembg",
+    "type": "function",
+    "name": "Remove Background (Image - fal.ai)",
+    "metadata": {
+      "cost": 1,
+      "menuCategory": "Image|Process",
+      "function": "fal:rembg",
+      "previewProperty": "outputs.image",
+      "runtime": "cloud",
+      "category": ["ai", "image"],
+      "dateCreated": 1711068889808,
+      "dateModified": 1711068889808,
+      "popularity": 8,
+      "filters": { "content": "image", "function": "edit" },
+      "provider": "fal",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Freplicate_rembg.jpg?alt=media&token=ca12da3e-d6b6-47b9-a428-1ba72633d8c2",
+      "description": "Remove the background from an image. Subject must be prominent. Struggles with hair, but usually fast.",
+      "tags": ["background", "removal", "remove"]
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "fal:sdxl",
+    "name": "Generate Image (SDXL - fal.ai)",
+    "type": "function",
+    "metadata": {
+      "provider": "fal",
+      "cost": 1,
+      "menuCategory": "Image",
+      "function": "fal:sdxl",
+      "runtime": "cloud",
+      "previewProperty": "outputs.image",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Freplicate_sdxl.jpg?alt=media&token=6dff14da-e5c3-43a9-bbf4-e71966cc6263",
+      "category": ["ai", "image"],
+      "dateCreated": 1711063672640,
+      "dateModified": 1711063672640,
+      "popularity": 8,
+      "filters": { "content": "image", "function": "create" },
+      "tags": [
+        "stable",
+        "diffusion",
+        "sd",
+        "xl",
+        "sdxl",
+        "stablediffusion",
+        "image",
+        "generation"
+      ],
+      "description": "Generate an image with Stable Diffusion XL"
+    },
+    "inputs": [
+      {
+        "name": "prompt",
+        "type": "string",
+        "metadata": {
+          "multiline": false,
+          "exposed": true,
+          "defaultValue": "A film still of a robot, sci-fi, cool color grading, 70mm, bokeh, cinematic, anamorphic, beautiful",
+          "label": "Prompt"
+        }
+      },
+      {
+        "name": "negative_prompt",
+        "type": "string",
+        "metadata": {
+          "label": "Negative Prompt",
+          "defaultValue": "soft, blurry, ugly"
+        }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "exposed": false, "defaultValue": 1024, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": 1024,
+          "label": "Height"
+        }
+      },
+      {
+        "name": "scheduler",
+        "type": "string",
+        "metadata": {
+          "display": "menu",
+          "menuValues": [
+            "DDIM",
+            "DPMSolverMultistep",
+            "HeunDiscrete",
+            "KarrasDPM",
+            "K_EULER",
+            "K_EULER_ANCESTRAL",
+            "PNDM"
+          ],
+          "defaultValue": "DDIM",
+          "label": "Scheduler"
+        }
+      },
+      {
+        "name": "num_inference_steps",
+        "type": "number",
+        "metadata": { "defaultValue": 25, "label": "Inference Steps" }
+      },
+      {
+        "name": "seed",
+        "type": "number",
+        "metadata": { "randomized": true, "label": "Seed" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  },
+  {
+    "id": "fal:sdxl-lightning",
+    "name": "Generate Image (SDXL Lightning - fal.ai)",
+    "type": "function",
+    "metadata": {
+      "provider": "fal",
+      "cost": 1,
+      "menuCategory": "Image",
+      "function": "fal:sdxl-lightning",
+      "runtime": "cloud",
+      "previewProperty": "outputs.image",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/magpai-c017e.appspot.com/o/nodeThumbnails%2Fsdxl_lightning.jpg?alt=media&token=76b9f846-7137-4821-a22c-96c07299f10d",
+      "category": ["ai", "image"],
+      "dateCreated": 1711063672640,
+      "dateModified": 1711063672640,
+      "popularity": 8,
+      "filters": { "content": "image", "function": "create" },
+      "tags": [
+        "stable",
+        "diffusion",
+        "sd",
+        "xl",
+        "sdxl",
+        "stablediffusion",
+        "image",
+        "generation",
+        "fast",
+        "lightning"
+      ],
+      "description": "A fast text-to-image model that makes high-quality images in 4 steps."
+    },
+    "inputs": [
+      {
+        "name": "prompt",
+        "type": "string",
+        "metadata": {
+          "multiline": false,
+          "exposed": true,
+          "defaultValue": "A film still of a robot, sci-fi, cool color grading, 70mm, bokeh, cinematic, anamorphic, beautiful",
+          "label": "Prompt"
+        }
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "metadata": { "exposed": false, "defaultValue": 1024, "label": "Width" }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "metadata": {
+          "exposed": false,
+          "defaultValue": 1024,
+          "label": "Height"
+        }
+      },
+      {
+        "name": "num_inference_steps",
+        "type": "number",
+        "metadata": { "defaultValue": 4, "label": "Inference Steps" }
+      },
+      {
+        "name": "seed",
+        "type": "number",
+        "metadata": { "randomized": true, "label": "Seed" }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "image",
+        "type": "image",
+        "metadata": { "exposed": true, "label": "Image" }
+      }
+    ]
+  }
+]

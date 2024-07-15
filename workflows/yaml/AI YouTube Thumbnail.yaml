@@ -1,0 +1,133 @@
+name: AI YouTube Thumbnail
+
+description:
+  goal: Generate a visually appealing YouTube thumbnail featuring flying pigs based on a user-provided video description.
+  keySteps:
+    - Accept user input for the video description
+    - Generate multiple image ideas using GPT-4 based on the description
+    - Select a specific image idea from the generated list
+    - Create a high-quality image using DALL-E 3 based on the selected idea
+    - Process the generated image by resizing, adding an outline, and applying a drop shadow
+    - Compose the final thumbnail by combining the processed image with additional elements
+  summary: This workflow automates the creation of an eye-catching YouTube thumbnail by leveraging AI-generated content and image processing techniques. It combines user input, text generation, image creation, and various image manipulation steps to produce a professional-looking thumbnail tailored to the video's content.
+
+nodes:
+  - id: "ArrayGet"
+    nodeType: "default:array:get"
+    inputs:
+      - name: "array"
+        value:
+          [
+            "1. A pig with wings soaring through a sky filled with fluffy clouds and a vibrant sunset in the background.",
+            "2. A group of pigs with wings participating in an air show, performing synchronized stunts and formation flying.",
+            "3. A pig dressed as a pilot, wearing aviator goggles and sitting in the cockpit of a small airplane with wings.",
+            "4. A playful image of a pig wearing a superhero cape, flying through the cityscape and spreading joy and cheer.",
+            "5. A pig floating gracefully in a hot air balloon, with a beautiful landscape beneath, showcasing the pig's unique ability to fly.",
+            "6. A whimsical illustration of pigs launching themselves from a giant slingshot, with a rainbow-colored sky as the backdrop.",
+          ]
+      - name: "index"
+        value: 4
+
+  - id: "StickyNote"
+    nodeType: "default:sticky_note"
+    inputs:
+      - name: "note"
+        value: "Create image ideas from initial prompt"
+      - name: "textSize"
+        value: 122
+
+  - id: "DalleImageGeneration"
+    nodeType: "openai:dalle-3"
+    inputs:
+      - name: "prompt"
+        value: "RAW Photo, DSLR, 8k, panoramic view capturing pigs flying above a peaceful countryside village, their outlines mirrored in a tranquil lake."
+      - name: "quality"
+        value: "hd"
+
+  - id: "ImageOutline"
+    nodeType: "default:image:outline"
+    inputs:
+      - name: "width"
+        value: 9
+      - name: "color"
+        value: "#FFFFFFFF"
+
+  - id: "ImageResize"
+    nodeType: "default:image:resize"
+    inputs:
+      - name: "width"
+        value: 1280
+      - name: "height"
+        value: 720
+      - name: "type"
+        value: "cover"
+      - name: "backgroundColor"
+        value: "#00000000"
+
+  - id: "StringInput"
+    nodeType: "default:input:string"
+    inputs:
+      - name: "name"
+        value: "Video Description"
+      - name: "description"
+        value: "Briefly describe the contents or subject matter of the video"
+      - name: "defaultValue"
+        value: "A video about the day when pigs fly"
+
+  - id: "ImageDropShadow"
+    nodeType: "default:image:drop_shadow"
+    inputs:
+      - name: "amount"
+        value: 4
+      - name: "offset_x"
+        value: 0
+      - name: "offset_y"
+        value: 4
+      - name: "color"
+        value: "#00000099"
+
+  - id: "StringSplit"
+    nodeType: "default:string:split"
+    inputs:
+      - name: "value"
+        value: "1. Image Idea: An artistic illustration of a pig with magnificent, angelic wings, soaring gracefully through the sky. This image could be incorporated into the video's intro or title screen to create intrigue and capture attention.\n\n2. Image Idea: A quirky cartoon image depicting a group of skeptical people, heads turned upwards in disbelief as they witness a pig actually flying. This image could be used to convey the concept's humor and playfulness, setting the tone for an entertaining video.\n\n3. Image Idea: A series of stunning aerial shots showcasing vast landscapes, with a subtle inclusion of flying pigs in the frame. This image idea could be used to highlight the beautiful locations where the scenario takes place, further emphasizing the magical nature of the video's narrative.\n\n4. Image Idea: An image featuring a pig \"preparing for takeoff\" with a comical pilot's goggles and aviator hat. This image could symbolize the pigs' adventurous spirit and add a touch of whimsy to the visual narrative.\n\n5. Image Idea: A split-screen image showcasing a pig trying out various flying contraptions like jetpacks, hot air balloons, and homemade wings. By capturing the pig's unsuccessful attempts before achieving flight, this image idea could serve as a visual representation of perseverance and"
+      - name: "separator"
+        value: "\n\n"
+
+edges:
+  - source: "ArrayGet.value"
+    target: "DalleImageGeneration.prompt"
+  - source: "DalleImageGeneration.image"
+    target: "ImageResize.image"
+  - source: "ImageOutline.image"
+    target: "ImageDropShadow.image"
+  - source: "ImageResize.image"
+    target: "ImageComposite.under"
+  - source: "StringInput.value"
+    target: "StringConcat.input_b"
+  - source: "ImageDropShadow.image"
+    target: "ImageComposite.over"
+  - source: "StringSplit.value"
+    target: "ArrayGet.array"
+  - source: "ImageAutoCrop.image"
+    target: "ImageResize.image"
+  - source: "ImageConcat.image"
+    target: "ImageResize.image"
+  - source: "DalleImageGeneration.image"
+    target: "ImageConcat.image_b"
+  - source: "ImageResize.image"
+    target: "ImageOutline.image"
+  - source: "ImageComposite.image"
+    target: "ImageOutput.value"
+  - source: "ImageInput.value"
+    target: "RemoveBg.image"
+  - source: "Gpt4.result"
+    target: "StringSplit.value"
+  - source: "RemoveBg.image"
+    target: "ImageAutoCrop.image"
+  - source: "StringConcat.value"
+    target: "Gpt4.prompt"
+  - source: "StringConcat.value"
+    target: "StringConcat.input_a"
+  - source: "ArrayGet.value"
+    target: "DalleImageGeneration.prompt"

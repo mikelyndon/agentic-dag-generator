@@ -1,0 +1,126 @@
+name: Magpai Social Post
+
+description:
+  goal: Create a stylized social media post by combining a hero image with a logo, applying effects, and formatting for optimal presentation.
+
+  keySteps:
+    - Input a hero image and resize it to fit a 700x500 pixel area within an 800x600 canvas
+    - Apply a drop shadow effect to the hero image for depth
+    - Input a logo image and position it at the bottom right corner of the canvas
+    - Create a mask from the logo's transparency and invert it
+    - Use the inverted mask to cut out the hero image, creating a stylized effect
+    - Composite the masked hero image with a white background
+    - Output the final image as a JPG suitable for social media posting
+
+  summary: This workflow takes a hero image and a logo, applies creative masking and shadow effects, and combines them into a visually appealing 800x600 pixel image. The process ensures the hero image is prominently displayed while the logo is strategically placed, resulting in a professional-looking social media post.
+
+nodes:
+  - id: "ImageMask"
+    nodeType: "default:image:mask"
+
+  - id: "BlankImage"
+    nodeType: "default:image:blank"
+    inputs:
+      - name: "width"
+        value: "800"
+      - name: "height"
+        value: "600"
+      - name: "color"
+        value: "#FFFFFFFF"
+
+  - id: "InvertImage"
+    nodeType: "default:image:invert"
+
+  - id: "CompositeImage"
+    nodeType: "default:image:composite"
+
+  - id: "TransparentBlankImage"
+    nodeType: "default:image:blank"
+    inputs:
+      - name: "width"
+        value: "800"
+      - name: "height"
+        value: "600"
+      - name: "color"
+        value: "#FFFFFF00"
+
+  - id: "PlaceImage"
+    nodeType: "default:image:place"
+    inputs:
+      - name: "placementX"
+        value: 640
+      - name: "placementY"
+        value: 450
+      - name: "overUnitHandling"
+        value: "pixels"
+
+  - id: "OutputImage"
+    nodeType: "default:output:image"
+    inputs:
+      - name: "imageType"
+        value: "jpg"
+
+  - id: "InputImage"
+    nodeType: "default:input:image"
+    inputs:
+      - name: "exposed"
+        value: false
+
+  - id: "MakeMask"
+    nodeType: "default:image:make_mask"
+
+  - id: "PlaceImageWithResize"
+    nodeType: "default:image:place"
+    inputs:
+      - name: "placementX"
+        value: 50
+      - name: "placementY"
+        value: 50
+      - name: "overWidth"
+        value: 700
+      - name: "overHeight"
+        value: 500
+      - name: "overUnitHandling"
+        value: "pixels"
+      - name: "resizeType"
+        value: "cover"
+
+  - id: "HeroInputImage"
+    nodeType: "default:input:image"
+    inputs:
+      - name: "name"
+        value: "Hero"
+
+  - id: "DropShadow"
+    nodeType: "default:image:drop_shadow"
+    inputs:
+      - name: "amount"
+        value: 10
+      - name: "color"
+        value: "#00000082"
+
+edges:
+  - source: "ImageMask.image"
+    target: "DropShadow.image"
+  - source: "BlankImage.image"
+    target: "CompositeImage.under"
+  - source: "InvertImage.image"
+    target: "ImageMask.mask"
+  - source: "CompositeImage.image"
+    target: "OutputImage.value"
+  - source: "TransparentBlankImage.image"
+    target: "PlaceImage.under"
+  - source: "TransparentBlankImage.image"
+    target: "PlaceImageWithResize.under"
+  - source: "PlaceImage.image"
+    target: "MakeMask.image"
+  - source: "InputImage.value"
+    target: "PlaceImage.over"
+  - source: "PlaceImageWithResize.image"
+    target: "ImageMask.image"
+  - source: "MakeMask.image"
+    target: "InvertImage.image"
+  - source: "HeroInputImage.value"
+    target: "PlaceImageWithResize.over"
+  - source: "DropShadow.image"
+    target: "CompositeImage.over"
