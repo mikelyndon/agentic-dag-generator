@@ -2,7 +2,7 @@
 
 This repo includes an agentic workflow for generating node-graphs for the workflow automation app, [Magpai](https://magpai.app/). But, the ideas presented here should be applicable to other node graph building apps like ComfyUI, Zapier, etc.
 
-For a high level overview of the project I've recorded a video explaining the process.
+For a high level overview of the project I've recorded [a video explaining the process](https://youtu.be/4v42JHuI30Y?si=lmM7z2hkZZ6gkZbY).
 
 This repo includes a subset of the nodes/functions and workflows available in Magpai so you have an idea of how this setup works.
 
